@@ -47,17 +47,21 @@ $(document).ready(function() {
 		$("#back").hide();
 		$("#next").hide();
 	});
-
+	
 	$("input").keyup(function() {
-		var search = $("input").val();
-		$(".galleryItem").hide();
-		$(".galleryItem").each(function() {
-			var keyword = $(this).attr("alt");
-			if ( search == keyword) {
-				$(this).show();
-			} else if (search == "") {
-				$(".galleryItem").show();
-			}
-		});
+	    var input, filter, ul, li, a, i;
+	    input = document.getElementById('input');
+	    filter = input.value.toUpperCase();
+	    ul = document.getElementById("gallery");
+	    li = ul.getElementsByTagName('li');
+
+	    for (i = 0; i < li.length; i++) {
+	        a = li[i].getElementsByTagName("p")[0];
+	        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	            $(li[i]).show();
+	        } else {
+	        	$(li[i]).hide();
+	        }
+	    }
 	});
 });
